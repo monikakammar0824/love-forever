@@ -88,6 +88,28 @@ body {
     79%  { transform: translateY(428.57143px); }
     100% { transform: translateY(180px); }
 }
+
+/* Music button */
+#musicButton {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 12px 24px;
+    border: 1px solid #ea80b0;
+    border-radius: 30px;
+    background: rgba(234, 128, 176, 0.15);
+    color: #ffc1dc;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(234, 128, 176, 0.5);
+}
+
+#musicButton:active {
+    transform: translateX(-50%) scale(0.95);
+}
 </style>
 </head>
 
@@ -95,7 +117,19 @@ body {
 
 <div id="ui"></div>
 
+<!-- Background music -->
+<audio id="backgroundMusic" loop preload="auto">
+    <source src="my-song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Music button -->
+<button id="musicButton" type="button">
+    ❤️ Play Our Song
+</button>
+
 <script>
+
+/* Original love animation */
 const N = 100;
 const ui = document.getElementById("ui");
 
@@ -122,6 +156,27 @@ for (let i = 1; i <= N; i++) {
 
     ui.appendChild(love);
 }
+
+/* Background music controls */
+const music = document.getElementById("backgroundMusic");
+const musicButton = document.getElementById("musicButton");
+
+musicButton.addEventListener("click", async function () {
+
+    if (music.paused) {
+        try {
+            await music.play();
+            musicButton.textContent = "⏸ Pause Our Song";
+        } catch (error) {
+            musicButton.textContent = "❤️ Play Our Song";
+            alert("Music could not play. Please check that my-song.mp3 is uploaded correctly.");
+        }
+    } else {
+        music.pause();
+        musicButton.textContent = "❤️ Play Our Song";
+    }
+});
+
 </script>
 
 </body>
