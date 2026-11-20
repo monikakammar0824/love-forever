@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forever Yours ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    #ui {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .love {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      --i: 1;
+    }
+
+    .love_horizontal {
+      animation: horizontal 10s infinite alternate ease-in-out;
+      animation-delay: calc(var(--i) * -300ms);
+    }
+
+    .love_vertical {
+      animation: vertical 20s infinite linear;
+      animation-delay: calc(var(--i) * -300ms);
+    }
+
+    .love_word {
+      color: #ea80b0;
+      font-size: clamp(12px, 1.4rem, 24px);
+      text-shadow: 0 0 10px #fff, 0 0 20px #ea80b0;
+      letter-spacing: 2px;
+      white-space: nowrap;
+      transform: translateY(-100%) rotateZ(-30deg);
+    }
+
+    @keyframes horizontal {
+      from {
+        transform: translateX(-45vw);
+      }
+      to {
+        transform: translateX(45vw);
+      }
+    }
+
+    @keyframes vertical {
+      0%   { transform: translateY(45vh); }
+      10%  { transform: translateY(11vh); }
+      18%  { transform: translateY(0); }
+      25%  { transform: translateY(28vh); }
+      32%  { transform: translateY(0); }
+      50%  { transform: translateY(45vh); }
+      75%  { transform: translateY(75vh); }
+      100% { transform: translateY(45vh); }
+    }
+
+    .center-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      z-index: 1000;
+      pointer-events: none;
+      width: 90%;
+      text-shadow: 0 0 15px #ea80b0;
+    }
+
+    .center-message h1 {
+      color: #ff9bc8;
+      font-size: clamp(24px, 5vw, 42px);
+      margin: 0 0 12px;
+    }
+
+    .center-message p {
+      font-size: clamp(14px, 3vw, 20px);
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 600px) {
+      .love_word {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="ui"></div>
+
+  <div class="center-message">
+    <h1>Forever Yours ❤️</h1>
+    <p>To my Santosh ji... I love you endlessly. 💗</p>
+  </div>
+
+  <script>
+    const N = 100;
+    const ui = document.getElementById("ui");
+
+    for (let i = 1; i <= N; i++) {
+      const love = document.createElement("div");
+      love.className = "love";
+      love.style.setProperty("--i", i);
+
+      const horizontal = document.createElement("div");
+      horizontal.className = "love_horizontal";
+
+      const vertical = document.createElement("div");
+      vertical.className = "love_vertical";
+
+      const word = document.createElement("div");
+      word.className = "love_word";
+      word.textContent = "I love you Santosh ji ❤️";
+
+      vertical.appendChild(word);
+      horizontal.appendChild(vertical);
+      love.appendChild(horizontal);
+      ui.appendChild(love);
+    }
+  </script>
+
+</body>
+</html>
